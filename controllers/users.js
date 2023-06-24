@@ -1,24 +1,17 @@
 const User = require("../models/user");
 
 const getAll = async (req, res) => {
-    try {
-        const page = parseInt(req.query.page) || 1; // Current page (default: 1)
-        const limit = parseInt(req.query.limit) || 10; // Number of results per page (default: 10)
+    
+    const page = parseInt(req.query.page) || 1; // Current page (default: 1)
+    const limit = parseInt(req.query.limit) || 10; // Number of results per page (default: 10)
 
-        const totalUsers = await User.countDocuments({}); // Total number of users
+    const totalUsers = await User.countDocuments({}); // Total number of users
 
-        const totalPages = Math.ceil(totalUsers / limit); // Total number of pages
-        const offset = (page - 1) * limit; // Offset calculation
+    const totalPages = Math.ceil(totalUsers / limit); // Total number of pages
+    const offset = (page - 1) * limit; // Offset calculation
 
-        const user = await User.find({}).skip(offset).limit(limit);
-        res.status(200).json({ tasks });
-    } catch (error) {
-        res.status(500).json({
-            statusCode: 500,
-            message: "Somethig went wrong",
-            error: "Internal server error",
-        });
-    }
+    const user = await User.find({}).skip(offset).limit(limit);
+    res.status(200).json({ tasks });
 };
 
 // const createTask = async (req, res) => {
