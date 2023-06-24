@@ -1,7 +1,6 @@
 const User = require("../models/user");
 
-const getAll = async (req, res) => {
-    
+const getAllUsers = async (req, res) => {
     const page = parseInt(req.query.page) || 1; // Current page (default: 1)
     const limit = parseInt(req.query.limit) || 10; // Number of results per page (default: 10)
 
@@ -10,57 +9,55 @@ const getAll = async (req, res) => {
     const totalPages = Math.ceil(totalUsers / limit); // Total number of pages
     const offset = (page - 1) * limit; // Offset calculation
 
-    const user = await User.find({}).skip(offset).limit(limit);
-    res.status(200).json({ tasks });
+    const users = await User.find({}).skip(offset).limit(limit);
+    res.status(200).json({ users });
 };
 
-// const createTask = async (req, res) => {
-//     try {
-//         const task = await Task.create(req.body);
-//         res.status(201).json({ task });
-//     } catch (error) {
-//         res.status(500).json({ msg: error });
-//     }
-// };
+const createUser = async (req, res) => {
+    const user = await User.create(req.body);
+    res.status(201).json({ user });
+};
 
-// const getTask = async (req, res) => {
-//     try {
-//         const { id: taskID } = req.params;
-//         const task = await Task.findOne({ _id: taskID });
+const getUser = async (req, res) => {
+    const { id: userID } = req.params;
+    const user = await User.findOne({ _id: userID });
 
-//         if (!task) {
-//             return res.status(404).json({ msg: `No task with id: ${taskID}` });
-//         }
+    if (!user) {
+        return res.status(404).json({ msg: `No user with id: ${userID}` });
+    }
 
-//         res.status(200).json({ task });
-//     } catch (error) {
-//         res.status(500).json({ msg: error });
-//     }
-// };
+    res.status(200).json({ user });
+};
 
-// const updateTask = (req, res) => {
-//     res.send("update task");
-// };
+const updateUser = async (req, res) => {
+    const { id: userID } = req.params;
+    const user = await User.findOneAndUpdate({ _id: userID }, req.body, {
+        new: true,
+        runValidators: true,
+    });
 
-// const deleteTask = async (req, res) => {
-//     try {
-//         const { id: taskID } = req.params;
-//         const task = await Task.findOneAndDelete({ _id: taskID });
+    if (!user) {
+        return res.status(404).json({ msg: `No user with id: ${userID}` });
+    }
 
-//         if (!task) {
-//             return res.status(404).json({ msg: `No task with id: ${taskID}` });
-//         }
+    res.status(200).json({ user });
+};
 
-//         res.status(200).json({ task });
-//     } catch (error) {
-//         res.status(500).json({ msg: error });
-//     }
-// };
+const deleteUser = async (req, res) => {
+    const { id: userID } = req.params;
+    const user = await User.findOneAndDelete({ _id: userID });
 
-// module.exports = {
-//     getAllTasks,
-//     createTask,
-//     getTask,
-//     updateTask,
-//     deleteTask,
-// };
+    if (!user) {
+        return res.status(404).json({ msg: `No user with id: ${userID}` });
+    }
+
+    res.status(200).json({ user });
+};
+
+module.exports = {
+    getAllUsers,
+    createUser,
+    getUser,
+    updateUser,
+    deleteUser,
+};

@@ -8,7 +8,7 @@ const connectDB = require("./db/connectDB");
 const usersRoute = require("./routes/users");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // middleware
 app.use(express.json());
@@ -22,7 +22,7 @@ app.use(errorHandler);
 const start = async () => {
     try {
         // connectDB
-        await connectDB(process.env.MONGO_URI);
+        // await connectDB(process.env.MONGO_URI);
 
         app.listen(port, console.log(`Server is listening on port ${port}...`));
     } catch (error) {
