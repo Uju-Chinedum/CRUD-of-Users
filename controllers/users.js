@@ -1,13 +1,13 @@
 const User = require("../models/user");
 
 const getAllUsers = async (req, res) => {
-    const page = parseInt(req.query.page) || 1; // Current page (default: 1)
-    const limit = parseInt(req.query.limit) || 10; // Number of results per page (default: 10)
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
 
-    const totalUsers = await User.countDocuments({}); // Total number of users
+    const totalUsers = await User.countDocuments({});
 
-    const totalPages = Math.ceil(totalUsers / limit); // Total number of pages
-    const offset = (page - 1) * limit; // Offset calculation
+    const totalPages = Math.ceil(totalUsers / limit);
+    const offset = (page - 1) * limit;
 
     const users = await User.find({}).skip(offset).limit(limit);
     res.status(200).json({ users });
