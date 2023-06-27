@@ -29,8 +29,8 @@ The program provides the following routes:
 - **GET /api/v1/users**: Fetches all users from the database.
 - **POST /api/v1/users**: Creates all new user.
 - **GET /api/v1/users/:id**: Fetches a specific user by their ID.
-- **PATCH /api/v1/users**: Updates a user's by their ID.
-- **DELETE /api/v1/users**: Deletes a user by their ID.
+- **PATCH /api/v1/users/:id**: Updates a user's by their ID.
+- **DELETE /api/v1/users/:id**: Deletes a user by their ID.
 
 ## License
 
