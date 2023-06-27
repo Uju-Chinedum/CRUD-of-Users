@@ -20,7 +20,7 @@ const start = async () => {
     try {
         await connectDB(process.env.MONGO_URI);
 
-        app.listen(port));
+        app.listen(port);
     } catch (error) {
         console.log(error);
     }
