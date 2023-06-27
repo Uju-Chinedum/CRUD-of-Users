@@ -10,7 +10,12 @@ const getAllUsers = async (req, res) => {
     const offset = (page - 1) * limit;
 
     const users = await User.find({}).skip(offset).limit(limit);
-    res.status(200).json({ users });
+    res.status(200).json({
+        limit: limit,
+        offset: offset,
+        totalUsers: totalUsers,
+        users,
+    });
 };
 
 const createUser = async (req, res) => {
@@ -23,7 +28,11 @@ const getUser = async (req, res) => {
     const user = await User.findOne({ _id: userID });
 
     if (!user) {
-        return res.status(404).json({ msg: `No user with id: ${userID}` });
+        return res.status(404).json({
+            statusCode: 404,
+            message: "User Not Found",
+            error: "Not Found",
+        });
     }
 
     res.status(200).json({ user });
@@ -37,7 +46,11 @@ const updateUser = async (req, res) => {
     });
 
     if (!user) {
-        return res.status(404).json({ msg: `No user with id: ${userID}` });
+        return res.status(404).json({
+            statusCode: 404,
+            message: "User Not Found",
+            error: "Not Found",
+        });
     }
 
     res.status(200).json({ user });
@@ -48,7 +61,11 @@ const deleteUser = async (req, res) => {
     const user = await User.findOneAndDelete({ _id: userID });
 
     if (!user) {
-        return res.status(404).json({ msg: `No user with id: ${userID}` });
+        return res.status(404).json({
+            statusCode: 404,
+            message: "User Not Found",
+            error: "Not Found",
+        });
     }
 
     res.status(200).json({ user });

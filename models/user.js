@@ -14,14 +14,15 @@ const UserSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: [true, "Please provide a phone number"],
+        trim: true,
     },
     email: {
         type: String,
         required: [true, "Please provide an email"],
+        trim: true,
     },
     zipCode: {
         type: String,
-        required: [true, "Please provide a zip code"],
         trim: true,
     },
     street: {
@@ -31,7 +32,6 @@ const UserSchema = new mongoose.Schema({
     },
     number: {
         type: String,
-        required: [true, "Please provide a street number"],
         trim: true,
     },
     neighbourhood: {
