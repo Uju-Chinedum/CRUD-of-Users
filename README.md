@@ -14,7 +14,7 @@ This repository provides a Node.js and MongoDB application that creates a CRUD o
 
 5. In the project root directory, create a `.env` file and add the following environment variables:\
 `PORT=3000`\
-`MONGODB_URI=<your-mongodb-connection-url>`\
+`MONGO_URI=<your-mongodb-connection-url>`\
 Replace `<your-mongodb-connection-url>` with your actual MongoDB connection URL.
 
 ## Usage
